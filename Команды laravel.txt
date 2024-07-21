@@ -1,0 +1,129 @@
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+php artisan cache:clear
+php artisan route:trans:cache
+
+php artisan route:list
+
+
+php artisan serve
+Запускает встроенный сервер разработки для Laravel.
+
+Создание модели
+php artisan make:model Category -m 
+
+Миграция 
+php artisan migrate
+
+Откатить Миграцию 
+php artisan migrate:rollback
+
+php artisan make:model ModelName
+Создает новый Eloquent модель в папке app/Models.
+
+php artisan make:controller ControllerName
+Создает новый контроллер в папке app/Http/Controllers.
+
+php artisan make:migration create_table_name
+Создает новый файл миграции в папке database/migrations.
+
+php artisan migrate
+Применяет все непримененные миграции к базе данных.
+
+php artisan migrate:rollback
+Откатывает последнюю операцию миграции.
+
+php artisan make:seeder SeederName
+Создает новый сидер в папке database/seeders.
+
+php artisan db:seed
+Запускает все сидеры в базе данных.
+
+php artisan tinker
+Открывает интерактивную консоль, где можно выполнять любые команды PHP в контексте Laravel.
+
+php artisan route:list
+Показывает список всех зарегистрированных маршрутов.
+
+php artisan make:request RequestName
+Создает новый класс формы запроса для валидации входных данных.
+
+php artisan make:middleware MiddlewareName
+Создает новый middleware в папке app/Http/Middleware.
+
+php artisan cache:clear
+Очищает кеш приложения.
+
+php artisan config:cache
+Создает файл кэша конфигурации для ускорения загрузки конфигурации.
+
+php artisan queue:work
+Запускает обработчик очередей, который будет обрабатывать все фоновые задачи.
+
+php artisan make:job JobName
+Создает новый класс задания в папке app/Jobs.
+
+php artisan make:listener ListenerName
+Создает новый слушатель событий в папке app/Listeners.
+
+composer install
+Устанавливает все зависимости, указанные в composer.json.
+
+composer update
+Обновляет все зависимости до их последних доступных версий, указанных в composer.json.
+
+# DB_CONNECTION=sqlite
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=business_portal
+DB_USERNAME=root
+DB_PASSWORD=
+
+
+
+
+/**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        Schema::defaultStringLength(191);
+    }
+
+
+
+
+       ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+            'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+            'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+            'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
+            'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
+        ]);
+    })
+
+
+
+
+    Форма обратной связи
+        <form action="{{ route('contact.send.admin') }}" method="post">
+                @csrf
+                <div class="w-full h-full flex flex-col justify-between gap-[1rem]">
+                    <input type="text" id="name" name="name" placeholder="Имя" class="border border-neutral-200 focus:border-sky-600 py-[1rem] px-[1.5rem] w-full focus:outline-0" aria-label="Имя" required />
+                    <input type="email" id="email" name="email" placeholder="Email" class="border border-neutral-200 focus:border-sky-600 py-[1rem] px-[1.5rem] w-full focus:outline-0" aria-label="Email" required />
+                    <input type="text" id="subject" name="subject" placeholder="Тема сообщения" class="border border-neutral-200 focus:border-sky-600 py-[1rem] px-[1.5rem] w-full focus:outline-0" aria-label="Тема сообщения" required />
+                    <textarea id="message" name="message" placeholder="Сообщение" class="border border-neutral-200 focus:border-sky-600 py-[1rem] px-[1.5rem] w-full h-[8rem] focus:outline-0" aria-label="Сообщение" required></textarea>
+
+                    <div class="flex items-center">
+                        <input type="checkbox" id="privacy_policy" name="privacy_policy" class="border border-neutral-200 focus:border-sky-600 mr-2" aria-label="Согласие с политикой приватности" required />
+                        <label for="privacy_policy" class="text-neutral-600">Я согласен с <a href="{{ route('privacy.policy') }}" class="text-sky-600 underline">политикой приватности</a></label>
+                    </div>
+
+                    <button type="submit" class="w-6/12 mx-auto h-[3rem] border border-sky-600 duration-300 bg-sky-600 hover:bg-white hover:text-sky-600 text-white text-[1.3rem]">
+                        Отправить
+                    </button>
+                </div>
+            </form>
